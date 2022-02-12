@@ -7,14 +7,14 @@ The data structure implemented is a type of space- partitioning tree called a 2d
 When the main method in TwoDTreeDriver.java is run it will load the crime data file into the 2d tree. It will interact with the user as requested.
 
 Crime file loaded into 2d tree with 27218 records.
-What would you like to do?
-1: inorder
-2: preorder
-3: levelorder
-4: postorder
-5: reverseLevelOrder
-6: search for points within rectangle
-7: search for nearest neighbor
-8: quit
+What would you like to do?<br />
+1: inorder<br />
+2: preorder<br />
+3: levelorder<br />
+4: postorder<br />
+5: reverseLevelOrder<br />
+6: search for points within rectangle<br />
+7: search for nearest neighbor<br />
+8: quit<br />
 
 ![image](https://github.com/bkyappworks/Pittsburgh-Crime-with-2D-Tree/blob/main/rectangle-search-result.png)
