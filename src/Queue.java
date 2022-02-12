@@ -1,7 +1,3 @@
-/**
- * reference:
- * @param <T>
- */
 public class Queue<T> {
     // Queue.java is built with a linked list based queue – using front and rear pointers
     private class qNode {
@@ -25,8 +21,10 @@ public class Queue<T> {
         head.next = rear;
         rear.prev = head;
     }
-
-    // add to the rear
+    /**
+     * add to the rear.
+     * @param t
+     */
     public void addToRear(TwoDTree.TwoDTreeNode t) {
         if (curSize == qSize) {
             return;
@@ -39,7 +37,10 @@ public class Queue<T> {
         curSize++;
 
     }
-    // remove from the front
+    /**
+     * remove from the front.
+     * @return
+     */
     public TwoDTree.TwoDTreeNode removeFront() {
         if (curSize == 0) {
             return dummy;
@@ -52,10 +53,16 @@ public class Queue<T> {
         curSize--;
         return toBeDeleted.data;
     }
-
+    /**
+     * @return true if queue is Empty.
+     */
     public boolean isEmpty() {
         return curSize == 0;
     }
+    /**
+     * return the first value of queue.
+     * @return
+     */
     public TwoDTree.TwoDTreeNode peek() {
         if (isEmpty()) {
             return dummy;

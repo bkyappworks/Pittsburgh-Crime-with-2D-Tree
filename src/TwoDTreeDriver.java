@@ -62,6 +62,5 @@ public class TwoDTreeDriver {
             }
         } while(choice != 8);
         System.out.println("Thank you for exploring Pittsburgh crimes in the 1990’s.");
-
     }
 }

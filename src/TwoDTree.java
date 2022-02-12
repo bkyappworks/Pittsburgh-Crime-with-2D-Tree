@@ -19,12 +19,32 @@ public class TwoDTree {
             return y;
         }
 
+        public double getTime() {
+            return time;
+        }
+
+        public double getTract() {
+            return tract;
+        }
+
+        public double getLat() {
+            return lat;
+        }
+
+        public double getLon() {
+            return lon;
+        }
+
         public String getStreet() {
             return street;
         }
 
         public String getOffense() {
             return offense;
+        }
+
+        public String getDate() {
+            return date;
         }
 
         public TwoDTreeNode(double x, double y, double time, String street, String offense, String date, double tract, double lat, double lon) {
@@ -68,14 +88,19 @@ public class TwoDTree {
 //        }
     }
     /**
-     * pre-condition: The String crimeDataLocation contains the path to a file formatted in the exact same way as CrimeLatLonXY.csv
+     * pre-condition: The String crimeDataLocation contains the path to a file formatted in the exact same way as CrimeLatLonXY.csv.
      * post-condition: The 2d tree is constructed and may be printed or queried.
      * @param crimeDataLocation
      */
     public TwoDTree(String crimeDataLocation) throws FileNotFoundException {
         buildTwoDTree(crimeDataLocation);
-//        System.out.println(root);
     }
+    /**
+     * pre-condition: The String crimeDataLocation contains the path to a file formatted in the exact same way as CrimeLatLonXY.csv.
+     * post-condition: post-condition: The 2d tree is constructed and may be printed or queried.
+     * buildTwoDTree from given file
+     * @param crimeDataLocation
+     */
     public void buildTwoDTree(String crimeDataLocation) {
         File file = new File(crimeDataLocation);
         Scanner scanner = null;
@@ -106,7 +131,10 @@ public class TwoDTree {
             }
         }
     }
-
+    /**
+     * insert a given node to TwoDTree
+     * @param node
+     */
     private void insert(TwoDTreeNode node) {
         if (node == null) {
             return;
@@ -173,6 +201,10 @@ public class TwoDTree {
     public void preOrderPrint() {
         preOrderHelper(root);
     }
+    /**
+     * pre-condition: The 2d tree has been constructed.
+     * post-condition: The 2d tree is displayed with a pre-order traversal. Note: an example pre-order traversal appears on the course slides and will be discussed in class.
+     */
     private void preOrderHelper(TwoDTreeNode visit) {
         if (visit != null) {
             System.out.println(visit);
@@ -183,10 +215,16 @@ public class TwoDTree {
     /**
      * pre-condition: The 2d tree has been constructed.
      * post-condition: The 2d tree is displayed with an in-order traversal. Note: an example in-order traversal appears on the course slides and will be discussed in class.
+     * Big Theta value : Theta(n)
+     * Big Theta value reasoning : If a tree has n nodes, then each node is visited only once in inorder traversal and hence the complexity is O(n) and Omega(n), so Theta(n)
      */
     public void inOrderPrint() {
         inOrderHelper(root);
     }
+    /**
+     * pre-condition: The 2d tree has been constructed.
+     * post-condition: The 2d tree is displayed with an in-order traversal. Note: an example in-order traversal appears on the course slides and will be discussed in class.
+     */
     private void inOrderHelper(TwoDTreeNode visit) {
         if (visit != null) {
             inOrderHelper(visit.left);
@@ -201,6 +239,10 @@ public class TwoDTree {
     public void postOrderPrint() {
         postOrderHelper(root);
     }
+    /**
+     * pre-condition: The 2d tree has been constructed.
+     * post-condition: The 2d tree is displayed with a post-order traversal. Note: an example post-order traversal appears on the course slides and will be discussed in class.
+     */
     private void postOrderHelper(TwoDTreeNode visit) {
         if (visit != null) {
             postOrderHelper(visit.left);
@@ -211,6 +253,8 @@ public class TwoDTree {
     /**
      * pre-condition: The 2d tree has been constructed.
      * post-condition: The 2d tree is displayed with a level-order traversal.
+     * Big Theta value : Theta(n)
+     * Big Theta value reasoning : If a tree has n nodes, then each node is visited only once in inorder traversal and hence the complexity is O(n) and Omega(n), so Theta(n)
      */
     public void levelOrderPrint() {
         Queue<TwoDTreeNode> queue = new Queue<>(size);
@@ -239,8 +283,6 @@ public class TwoDTree {
     /**
      * pre-condition: The 2d tree has been constructed.
      * post-condition: The 2d tree is displayed with a reverse level- order traversal.
-     * Big Theta value
-     * Big Theta value reasoning
      */
     public void reverseLevelOrderPrint() {
         Queue<TwoDTreeNode> queue = new Queue<>(size);
@@ -268,6 +310,10 @@ public class TwoDTree {
         wrapList = reverseList(wrapList);
         System.out.println(wrapList);
     }
+    /**
+     * pre-condition: The 2d tree has been constructed.
+     * post-condition: The 2d tree is displayed with a reverse level- order traversal.
+     */
     private ArrayList reverseList(List original) {
         ArrayList newList = new ArrayList<>();
         for (int i = original.size()-1; i >= 0; i--) {
@@ -292,6 +338,20 @@ public class TwoDTree {
         findPointsInRangeHelper(x1,y1,x2,y2,crimeList,root,true);
         return crimeList;
     }
+    /**
+     * pre-condition: The 2d tree has been constructed
+     * post-condition: A list of 0 or more crimes is returned.
+     * These crimes occurred within the rectangular range specified by the four parameters.
+     * The pair (x1, y1) is the left bottom of the rectangle.
+     * The pair (x2, y2) is the top right of the rectangle.
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param crimeList
+     * @param cur
+     * @param align
+     */
     private void findPointsInRangeHelper(double x1, double y1, double x2, double y2, ListOfCrimes crimeList,TwoDTreeNode cur,boolean align) {
         if (cur == null) {
             return;
@@ -336,12 +396,26 @@ public class TwoDTree {
 
 
     }
+    /**
+     * check in x,y contains in rectangle represented by x1,y1,x2,y2.
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param x
+     * @param y
+     * @return true or false.
+     */
     private boolean contains(double x1, double y1, double x2, double y2, double x, double y) {
         if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
             return true;
         }
         return false;
     }
+    /**
+     * @param align
+     * @return opposite boolean value of input.
+     */
     private boolean changeBoolean(boolean align) {
         if (align == true) {
             align = false;
@@ -434,12 +508,19 @@ public class TwoDTree {
         }
 
     }
+    /**
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @return distance of two input points.
+     */
     private double getDistance(double x1,double y1,double x2,double y2) {
         double distance = Math.pow(Math.pow(x1-x2,2)+Math.pow(y1-y2,2),0.5);
         return distance;
     }
     public static void main(String[] args) throws FileNotFoundException {
-        TwoDTree twoDTree = new TwoDTree("test.csv");
+        TwoDTree twoDTree = new TwoDTree("CrimeLatLonXY.csv");
         System.out.println("size: "+twoDTree.size);
         System.out.println("---------- preOrderPrint ---------- ");
         twoDTree.preOrderPrint();
@@ -452,9 +533,7 @@ public class TwoDTree {
         System.out.println("---------- reverseLevelOrderPrint ---------- ");
         twoDTree.reverseLevelOrderPrint();
         System.out.println("crimeList: "+twoDTree.findPointsInRange(1357605.688,411838.5393,1358805.688,413038.5393));
-//        System.out.println("nearestNeighbor: "+twoDTree.nearestNeighbor(9,3));
-//        System.out.println(twoDTree.contains(1357605.688,411838.5393,1358805.688,413038.5393,1358205.688,412438.5393));
-
+        System.out.println("nearestNeighbor: "+twoDTree.nearestNeighbor(1359951.000, 410726.000));
     }
 
 }

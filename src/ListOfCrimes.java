@@ -3,8 +3,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * built using a singly linked list with a single head pointer
+ */
 public class ListOfCrimes {
-    // built using a singly linked list with a single head pointer
     crimeNode head;
     int size;
     static class crimeNode {
@@ -22,8 +24,10 @@ public class ListOfCrimes {
             return data+"";
         }
     }
-
-    // provide methods for adding crimes to the list and retrieving crimes from the list
+    /**
+     * insert crimeNode to a singly linked list.
+     * @param crime
+     */
     public void insertCrime(crimeNode crime) {
         if (head == null) {
             head = crime;
@@ -41,6 +45,10 @@ public class ListOfCrimes {
         return;
     }
 
+    /**
+     * @param index
+     * @return value of crimeNode at index
+     */
     public TwoDTree.TwoDTreeNode getCrimeAt(int index) {
         crimeNode cur = head;
         for (int i = 0; i < index; i++) {
@@ -77,7 +85,7 @@ public class ListOfCrimes {
                             "<name>"+this.getCrimeAt(i).getOffense()+"</name>\n" +
                             "<description>"+this.getCrimeAt(i).getStreet()+"</description> <styleUrl>#style1</styleUrl>\n" +
                             "<Point>\n" +
-                            "<coordinates>"+"-"+ this.getCrimeAt(i).getX()+","+this.getCrimeAt(i).getY()+","+"0.000000"+"</coordinates>\n" +
+                            "<coordinates>"+ this.getCrimeAt(i).getLon()+","+this.getCrimeAt(i).getLat()+","+"0.000000"+"</coordinates>\n" +
                             "      </Point>\n" +
                             "    </Placemark>\n";
         }
