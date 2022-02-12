@@ -11,22 +11,6 @@ public class TwoDTree {
         String street, offense, date;
         TwoDTreeNode left, right;
 
-        public double getX() {
-            return x;
-        }
-
-        public double getY() {
-            return y;
-        }
-
-        public double getTime() {
-            return time;
-        }
-
-        public double getTract() {
-            return tract;
-        }
-
         public double getLat() {
             return lat;
         }
@@ -43,9 +27,6 @@ public class TwoDTree {
             return offense;
         }
 
-        public String getDate() {
-            return date;
-        }
 
         public TwoDTreeNode(double x, double y, double time, String street, String offense, String date, double tract, double lat, double lon) {
             this.x = x;
@@ -74,17 +55,17 @@ public class TwoDTree {
                     ", " + lat +
                     ", " + lon ;
         }
-        //        @Override
+//                @Override
 //        public String toString() {
 //            return "x=" + x +
 //                    ", y=" + y + " ";
-//
-////            return "Node{" +
-////                    "x=" + x +
-////                    ", y=" + y +
-////                    ", left=" + left +
-////                    ", right=" + right +
-////                    '}';
+
+//            return "Node{" +
+//                    "x=" + x +
+//                    ", y=" + y +
+//                    ", left=" + left +
+//                    ", right=" + right +
+//                    '}';
 //        }
     }
     /**
@@ -97,7 +78,7 @@ public class TwoDTree {
     }
     /**
      * pre-condition: The String crimeDataLocation contains the path to a file formatted in the exact same way as CrimeLatLonXY.csv.
-     * post-condition: post-condition: The 2d tree is constructed and may be printed or queried.
+     * post-condition: The 2d tree is constructed and may be printed or queried.
      * buildTwoDTree from given file
      * @param crimeDataLocation
      */
@@ -132,6 +113,8 @@ public class TwoDTree {
         }
     }
     /**
+     * pre-condition: node is not null
+     * post-condition: given node is inserted.
      * insert a given node to TwoDTree
      * @param node
      */
@@ -397,6 +380,7 @@ public class TwoDTree {
 
     }
     /**
+     * pre-condition: x1,y1,x2,y2 are not null
      * check in x,y contains in rectangle represented by x1,y1,x2,y2.
      * @param x1
      * @param y1
@@ -413,6 +397,7 @@ public class TwoDTree {
         return false;
     }
     /**
+     * pre-condition: align is not null
      * @param align
      * @return opposite boolean value of input.
      */
@@ -441,6 +426,7 @@ public class TwoDTree {
         return neighbor[0];
     }
     /**
+     * pre-condition: x1,y1 are not null
      * @param x1 x-ordinate of user input
      * @param y1 y-ordinate of user input
      * @param neighbor an array stores the nearest neighbor
@@ -509,6 +495,7 @@ public class TwoDTree {
 
     }
     /**
+     * pre-condition: x1,y1,x2,y2 are not null
      * @param x1
      * @param y1
      * @param x2
