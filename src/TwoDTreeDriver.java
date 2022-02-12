@@ -58,7 +58,7 @@ public class TwoDTreeDriver {
                 System.out.println("Y: ");
                 double y1 = Double.parseDouble(scanner.nextLine());
                 twoDTree.nearestNeighbor(x1,y1);
-                System.out.println("Looked at 27 nodes in tree. Found the nearest crime at:"+twoDTree.nearestNeighbor(x1,y1));
+                System.out.println("Looked at 27 nodes in tree. \nFound the nearest crime at:"+twoDTree.nearestNeighbor(x1,y1));
             }
         } while(choice != 8);
         System.out.println("Thank you for exploring Pittsburgh crimes in the 1990’s.");

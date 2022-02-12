@@ -6,7 +6,6 @@ public class TwoDTree {
     private TwoDTreeNode root; // root node is X-aligned
     int size = 0;
     int cnt1 = 0;
-    int cnt2 = 0;
     static class TwoDTreeNode {
         double x,y,time,tract,lat,lon;
         String street, offense, date;
@@ -107,21 +106,27 @@ public class TwoDTree {
             }
         }
     }
+
     private void insert(TwoDTreeNode node) {
         if (node == null) {
             return;
         }
         if (root == null) {
             root = node;
+            return;
         }
         TwoDTreeNode parent = root;
         TwoDTreeNode current = root;
         int level = 0;
+        int cnt = 0;
         while (true) {
-            if (current.x == node.x && current.y == node.y) {
+            cnt++;
+            if (cnt == size) {
                 return;
             }
-
+//            if (current.x == node.x && current.y == node.y) {
+//                return;
+//            }
             parent = current;
             if (level % 2 == 0) {
                 if (current.x <= node.x) {
@@ -288,16 +293,15 @@ public class TwoDTree {
         return crimeList;
     }
     private void findPointsInRangeHelper(double x1, double y1, double x2, double y2, ListOfCrimes crimeList,TwoDTreeNode cur,boolean align) {
-        cnt1++;
         if (cur == null) {
             return;
         }
         // case 0: contains, for both x,y align
         if (contains(x1,y1,x2,y2,cur.x, cur.y)) {
             crimeList.insertCrime(new ListOfCrimes.crimeNode(cur));
-            changeBoolean(align);
-            findPointsInRangeHelper(x1,y1,x2,y2,crimeList,cur.left,align);
-            findPointsInRangeHelper(x1,y1,x2,y2,crimeList,cur.right,align);
+            findPointsInRangeHelper(x1,y1,x2,y2,crimeList,cur.left,changeBoolean(align));
+            findPointsInRangeHelper(x1,y1,x2,y2,crimeList,cur.right,changeBoolean(align));
+            cnt1++;
             return;
         }
         // the x cases
@@ -307,11 +311,11 @@ public class TwoDTree {
             findPointsInRangeHelper(x1,y1,x2,y2,crimeList,cur.right,changeBoolean(align));
         }
         // case 2 rec on the right
-        if (align == true && x1 >= cur.x) {
+        if (align == true && x1 > cur.x) {
             findPointsInRangeHelper(x1,y1,x2,y2,crimeList,cur.right,changeBoolean(align));
         }
         // case 3 rec on the left
-        if (align == true && x2 <= cur.x) {
+        if (align == true && x2 < cur.x) {
             findPointsInRangeHelper(x1,y1,x2,y2,crimeList,cur.left,changeBoolean(align));
         }
         // the y cases
@@ -321,13 +325,16 @@ public class TwoDTree {
             findPointsInRangeHelper(x1,y1,x2,y2,crimeList,cur.right,changeBoolean(align));
         }
         // case 2 rec above
-        if (align == false && y1 >= cur.y) {
+        if (align == false && y1 > cur.y) {
             findPointsInRangeHelper(x1,y1,x2,y2,crimeList,cur.right,changeBoolean(align));
         }
         // case 3 rec below
-        if (align == false && y2 <= cur.y) {
+        if (align == false && y2 < cur.y) {
             findPointsInRangeHelper(x1,y1,x2,y2,crimeList,cur.left,changeBoolean(align));
         }
+        cnt1++;
+
+
     }
     private boolean contains(double x1, double y1, double x2, double y2, double x, double y) {
         if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
@@ -425,14 +432,14 @@ public class TwoDTree {
                 }
             }
         }
-        cnt2++;
+
     }
     private double getDistance(double x1,double y1,double x2,double y2) {
         double distance = Math.pow(Math.pow(x1-x2,2)+Math.pow(y1-y2,2),0.5);
         return distance;
     }
     public static void main(String[] args) throws FileNotFoundException {
-        TwoDTree twoDTree = new TwoDTree("abc.csv");
+        TwoDTree twoDTree = new TwoDTree("test.csv");
         System.out.println("size: "+twoDTree.size);
         System.out.println("---------- preOrderPrint ---------- ");
         twoDTree.preOrderPrint();
@@ -444,9 +451,9 @@ public class TwoDTree {
         twoDTree.levelOrderPrint();
         System.out.println("---------- reverseLevelOrderPrint ---------- ");
         twoDTree.reverseLevelOrderPrint();
-        System.out.println("crimeList: "+twoDTree.findPointsInRange(10,15,20,19));
-        System.out.println("nearestNeighbor: "+twoDTree.nearestNeighbor(9,3));
-        System.out.println(twoDTree.contains(1357605.688,411838.5393,1358805.688,413038.5393,1358205.688,412438.5393));
+        System.out.println("crimeList: "+twoDTree.findPointsInRange(1357605.688,411838.5393,1358805.688,413038.5393));
+//        System.out.println("nearestNeighbor: "+twoDTree.nearestNeighbor(9,3));
+//        System.out.println(twoDTree.contains(1357605.688,411838.5393,1358805.688,413038.5393,1358205.688,412438.5393));
 
     }
 
